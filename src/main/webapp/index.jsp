@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CineNexus — Book Movie Tickets</title>
+<title>CineNexus — Book Telugu & Tamil Movie Tickets</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -59,8 +59,8 @@ nav a:hover,nav a.active{background:var(--surface);color:var(--primary)}
 .hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1400&q=80') center/cover;opacity:.3}
 .hero .container{position:relative;z-index:1}
 .hero .badge{display:inline-block;background:rgba(224,122,95,.25);color:#ffd4c4;padding:4px 16px;border-radius:999px;font-weight:600;font-size:13px;margin-bottom:16px}
-.hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;color:#fff;line-height:1.15;max-width:600px;margin-bottom:16px}
-.hero p{color:rgba(255,255,255,.8);font-size:17px;max-width:520px;margin-bottom:28px}
+.hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;color:#fff;line-height:1.15;max-width:640px;margin-bottom:16px}
+.hero p{color:rgba(255,255,255,.8);font-size:17px;max-width:560px;margin-bottom:28px}
 .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
 
 /* Section */
@@ -80,6 +80,7 @@ nav a:hover,nav a.active{background:var(--surface);color:var(--primary)}
 .rating-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.75);color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px}
 .rating-badge i{color:#f5a623;font-size:11px}
 .genre-tag{position:absolute;bottom:12px;left:12px;background:rgba(224,122,95,.9);color:#fff;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.lang-tag{position:absolute;bottom:12px;right:12px;background:rgba(26,26,46,.85);color:#fff;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600}
 .movie-card .body{padding:16px 18px 14px;flex:1;display:flex;flex-direction:column;gap:4px}
 .movie-card h5{font-size:16px;font-weight:700;line-height:1.3}
 .movie-card .meta{font-size:13px;color:var(--muted)}
@@ -243,8 +244,8 @@ footer{margin-top:16px;padding:44px 0 28px;border-top:1px solid rgba(26,26,46,.0
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <div class="badge"><i class="fas fa-star"></i> Now Booking</div>
-    <h1>Book Your Movie<br>Tickets in Seconds</h1>
+    <div class="badge"><i class="fas fa-star"></i> Now Booking — Telugu &amp; Tamil</div>
+    <h1>Book Your Telugu &amp; Tamil<br>Movie Tickets in Seconds</h1>
     <p>Choose a movie, pick your showtime, tap your seats, and you're done. Simple as that.</p>
     <div class="actions">
       <button class="btn btn-primary" onclick="document.getElementById('nowShowing').scrollIntoView({behavior:'smooth'})">
@@ -262,7 +263,7 @@ footer{margin-top:16px;padding:44px 0 28px;border-top:1px solid rgba(26,26,46,.0
   <div class="container">
     <div class="section-header">
       <div>
-        <h2>🎬 Now Showing</h2>
+        <h2>🎬 Now Showing — Telugu &amp; Tamil</h2>
         <p>Pick a movie and book your seats instantly</p>
       </div>
     </div>
@@ -296,7 +297,7 @@ footer{margin-top:16px;padding:44px 0 28px;border-top:1px solid rgba(26,26,46,.0
           <div class="summary-line"><span>Showtime</span><span id="sumTime">—</span></div>
           <div class="summary-line"><span>Seats</span><span id="sumSeats">—</span></div>
           <div class="selected-seats-display" id="selectedSeatsDisplay"></div>
-          <div class="summary-total"><span>Total</span><span id="sumTotal">$0</span></div>
+          <div class="summary-total"><span>Total</span><span id="sumTotal">₹0</span></div>
           <button class="btn btn-success btn-block" id="confirmBtn" disabled>
             <i class="fas fa-check"></i> Confirm Booking
           </button>
@@ -312,7 +313,7 @@ footer{margin-top:16px;padding:44px 0 28px;border-top:1px solid rgba(26,26,46,.0
   <div class="container">
     <div class="section-header">
       <div>
-        <h2>🎥 Coming Soon</h2>
+        <h2>🎥 Coming Soon — Telugu &amp; Tamil</h2>
         <p>Mark your calendar for these upcoming releases</p>
       </div>
     </div>
@@ -358,104 +359,101 @@ footer{margin-top:16px;padding:44px 0 28px;border-top:1px solid rgba(26,26,46,.0
 
 <script>
 /* ============================================================
-   DATA
+   DATA — Current Telugu & Tamil Movies (2025–2026)
+   Prices in ₹ (Indian Rupees)
 ============================================================ */
 const MOVIES = [
-  { id:1, title:'Dune: Part Two', genre:'Sci-Fi', rating:8.7, duration:'2h 46m', cert:'UA',
-    price:12, img:'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80' },
-  { id:2, title:'Oppenheimer', genre:'Drama', rating:8.4, duration:'3h 0m', cert:'A',
-    price:14, img:'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=600&q=80' },
-  { id:3, title:'Spider-Man: No Way Home', genre:'Action', rating:8.2, duration:'2h 28m', cert:'UA',
-    price:11, img:'https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=600&q=80' },
-  { id:4, title:'The Batman', genre:'Crime', rating:7.8, duration:'2h 56m', cert:'UA',
-    price:11, img:'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=600&q=80' },
-  { id:5, title:'Interstellar', genre:'Sci-Fi', rating:8.7, duration:'2h 49m', cert:'UA',
-    price:10, img:'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=600&q=80' },
-  { id:6, title:'Inception', genre:'Thriller', rating:8.8, duration:'2h 28m', cert:'UA',
-    price:10, img:'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80' }
+  // TELUGU
+  {
+    id: 1, lang: 'Telugu', title: 'Pushpa 2: The Rule',
+    genre: 'Action', rating: 8.4, duration: '3h 20m', cert: 'UA',
+    price: 250, // ₹ per seat
+    img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 2, lang: 'Telugu', title: 'Game Changer',
+    genre: 'Political Action', rating: 7.9, duration: '2h 45m', cert: 'UA',
+    price: 200,
+    img: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 3, lang: 'Telugu', title: 'Kalki 2898 AD',
+    genre: 'Sci-Fi Epic', rating: 8.1, duration: '3h 0m', cert: 'UA',
+    price: 220,
+    img: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 4, lang: 'Telugu', title: 'Salaar: Part 1',
+    genre: 'Action Thriller', rating: 7.6, duration: '2h 55m', cert: 'A',
+    price: 180,
+    img: 'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=600&q=80'
+  },
+  // TAMIL
+  {
+    id: 5, lang: 'Tamil', title: 'Vettaiyan',
+    genre: 'Action Drama', rating: 7.8, duration: '2h 40m', cert: 'UA',
+    price: 190,
+    img: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 6, lang: 'Tamil', title: 'Amaran',
+    genre: 'Biographical War', rating: 8.6, duration: '2h 50m', cert: 'UA',
+    price: 210,
+    img: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 7, lang: 'Tamil', title: 'GOAT — Greatest of All Time',
+    genre: 'Action Sci-Fi', rating: 7.5, duration: '2h 45m', cert: 'UA',
+    price: 200,
+    img: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 8, lang: 'Tamil', title: 'Leo',
+    genre: 'Action Thriller', rating: 7.9, duration: '2h 44m', cert: 'UA',
+    price: 180,
+    img: 'https://images.unsplash.com/photo-1608889175123-8ee362201f81?auto=format&fit=crop&w=600&q=80'
+  }
 ];
 
 const COMING = [
-  { id:101, title:'Avatar 3', genre:'Adventure', rating:0, duration:'TBA', cert:'UA',
-    price:13, img:'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?auto=format&fit=crop&w=600&q=80' },
-  { id:102, title:'Deadpool 4', genre:'Action', rating:0, duration:'TBA', cert:'A',
-    price:13, img:'https://images.unsplash.com/photo-1608889175123-8ee362201f81?auto=format&fit=crop&w=600&q=80' },
-  { id:103, title:'Frozen 3', genre:'Animation', rating:0, duration:'TBA', cert:'U',
-    price:10, img:'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80' },
-  { id:104, title:'Mission: Impossible 8', genre:'Action', rating:0, duration:'TBA', cert:'UA',
-    price:13, img:'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=600&q=80' }
+  // TELUGU
+  {
+    id: 101, lang: 'Telugu', title: 'Pushpa 3: The Rampage',
+    genre: 'Action', rating: 0, duration: 'TBA', cert: 'UA',
+    price: 280,
+    img: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 102, lang: 'Telugu', title: 'RRR 2',
+    genre: 'Action Epic', rating: 0, duration: 'TBA', cert: 'UA',
+    price: 300,
+    img: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=600&q=80'
+  },
+  // TAMIL
+  {
+    id: 103, lang: 'Tamil', title: 'Coolie',
+    genre: 'Action Drama', rating: 0, duration: 'TBA', cert: 'UA',
+    price: 250,
+    img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 104, lang: 'Tamil', title: 'Thug Life',
+    genre: 'Crime Drama', rating: 0, duration: 'TBA', cert: 'A',
+    price: 260,
+    img: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=600&q=80'
+  }
 ];
 
+/* Showtimes for both languages */
 const SHOWTIMES = ['10:30 AM','1:15 PM','4:00 PM','7:30 PM','10:15 PM'];
+
+/* Seat map: 6 rows (A–F) × 8 seats = 48 seats */
 const ROWS = ['A','B','C','D','E','F'];
 const SEATS_PER_ROW = 8;
 const MAX_SEATS = 8;
 
-/* Predefine some seats as already taken (per movie + time combo, we randomize on render) */
+/* Deterministic "taken" seats per movie+time combo so it's consistent */
 function generateSeats(seed){
   const seats = [];
   let rnd = seed;
-  const rand = () => { rnd = (rnd * 9301 + 49297) % 233280; return rnd / 233280; };
-  for(let r=0;r<ROWS.length;r++){
-    for(let c=1;c<=SEATS_PER_ROW;c++){
-      const id = ROWS[r] + c;
-      // ~20% chance a seat is taken
-      seats.push({ id, row:ROWS[r], col:c, taken: rand() < 0.22 });
-    }
-  }
-  return seats;
-}
-
-/* ============================================================
-   STATE
-============================================================ */
-const state = {
-  selectedMovie: null,
-  selectedTime: null,
-  seats: [],
-  selectedSeats: new Set()
-};
-
-/* ============================================================
-   DOM
-============================================================ */
-const moviesGrid = document.getElementById('moviesGrid');
-const comingGrid = document.getElementById('comingGrid');
-const bookingPanel = document.getElementById('bookingPanel');
-const bookingMovieTitle = document.getElementById('bookingMovieTitle');
-const bookingMovieMeta = document.getElementById('bookingMovieMeta');
-const timeSlotsEl = document.getElementById('timeSlots');
-const seatsGridEl = document.getElementById('seatsGrid');
-const sumMovie = document.getElementById('sumMovie');
-const sumTime = document.getElementById('sumTime');
-const sumSeats = document.getElementById('sumSeats');
-const sumTotal = document.getElementById('sumTotal');
-const selectedSeatsDisplay = document.getElementById('selectedSeatsDisplay');
-const confirmBtn = document.getElementById('confirmBtn');
-const modalOverlay = document.getElementById('modalOverlay');
-const modalDetails = document.getElementById('modalDetails');
-const toast = document.getElementById('toast');
-const toastMsg = document.getElementById('toastMsg');
-
-/* ============================================================
-   HELPERS
-============================================================ */
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-
-function showToast(msg){
-  toastMsg.textContent = msg;
-  toast.classList.add('show');
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=>toast.classList.remove('show'),2200);
-}
-
-/* ============================================================
-   RENDER: Movies
-============================================================ */
-function renderMovies(list, container, coming=false){
-  container.innerHTML = '';
-  list.forEach(m=>{
-    const card = document.createElement('article');
-    card.className = 'movie-card';
-    card.dataset.id = m.id;
-    const ratingHtml =
+  const rand = () => { rnd = (rnd * 9301 + 49297) % 233280; return rnd / 233280
